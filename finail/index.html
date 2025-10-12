@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Virtual Garden Pet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>My Virtual Garden Pet</h1>
+        <div id="welcome">
+            <p>Welcome! Take care of your plant and watch it grow. 🌱</p>
+        </div>
+        <div id="weather">
+            <img id="weatherIcon" src="sunny.png" alt="Weather" style="width:50px;">
+            <span id="weatherText">Sunny</span>
+        </div>
+        <div id="garden">
+            <img id="pet" src="seedling.png.jpg" alt="Garden Pet">
+            <div id="status">Status: Happy Seedling</div>
+        </div>
+        <div id="funFact">
+            <p id="factText">Did you know? Plants convert sunlight into energy through photosynthesis!</p>
+        </div>
+        <div id="controls">
+            <button id="waterBtn">Water</button>
+            <button id="fertilizeBtn">Fertilize</button>
+            <button id="pestBtn">Remove Pests</button>
+            <button id="changeWeatherBtn">Change Weather</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <section id="qa">
+        <h2>Plant Q&A</h2>
+        <input type="text" id="questionInput" placeholder="Ask a question about plants..." />
+        <button id="askBtn">Ask</button>
+        <div id="answerArea"></div>
+    </section>
+</body>
+</html>
