@@ -123,6 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
                        "Woof？";
         }
         if(speech) speech.textContent = reaction;
+        if(animal === 'cat') addEXP(1); // 喂猫加 10 EXP
+        else if(animal === 'dog') addEXP(1); // 喂狗加 10 EXP
         setTimeout(()=>{ if(speech) speech.textContent = randomDialogue(animal); }, 3000);
     }
 
@@ -550,5 +552,46 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById("mg-restart").onclick = loadMemoryGame;
 loadMemoryGame();
 
+// -------------------- Player Level System --------------------
+let player = {
+    level: 1,
+    exp: 0,
+    expToNext: 5
+};
 
+function addEXP(amount) {
+    player.exp += amount;
+
+    // 如果升级
+    if (player.exp >= player.expToNext) {
+        player.level++;
+        player.exp = player.exp - player.expToNext;
+        player.expToNext += 5; // 每次升级需要更多经验
+
+        showLevelUpMessage();
+    }
+
+    updatePlayerUI();
+}
+
+function updatePlayerUI() {
+    document.getElementById("player-level").textContent = player.level;
+    document.getElementById("player-exp").textContent = player.exp;
+    document.getElementById("player-exp-max").textContent = player.expToNext;
+
+    document.getElementById("exp-bar").style.width =
+    (player.exp / player.expToNext * 100) + "%";
+}
+function showLevelUpMessage() {
+    const msg = document.getElementById("level-up-msg");
+    msg.style.display = "block";
+
+    setTimeout(() => {
+        msg.style.display = "none";
+    }, 2000);
+}
+
+// 初始化 UI
+updatePlayerUI();
+ 
 });
