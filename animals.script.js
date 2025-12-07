@@ -34,11 +34,41 @@ document.addEventListener('DOMContentLoaded', function() {
             div.style.margin = '4px';
             let img;
             switch(item){
-                case 'Apple': img = document.createElement('img'); img.src='apple.png'; break;
-                case 'Fish': img = document.createElement('img'); img.src='fish.png'; break;
-                case 'Water': img = document.createElement('img'); img.src='water.png'; break;
-                default: img = document.createTextNode(item);
-            }
+             case 'Apple': 
+             img = document.createElement('img'); 
+            img.src='apple.png'; 
+             break;
+
+            case 'Fish': 
+            img = document.createElement('img'); 
+            img.src='fish.png'; 
+            break;
+
+            case 'Water': 
+            img = document.createElement('img'); 
+            img.src='water.png'; 
+            break;
+
+    // ✅ 新加的物品
+          case 'DogBone':
+          img = document.createElement('img');
+          img.src = 'DogBone.png';
+          break;
+
+          case 'CatFood':
+          img = document.createElement('img');
+          img.src = 'CatFood.png';
+          break;
+
+         case 'LuckyCharm':
+         img = document.createElement('img');
+         img.src = 'luckycharm.png';
+         break;
+
+    default:
+        img = document.createTextNode(item);
+}
+
             if(img.tagName){ img.style.width='32px'; img.style.height='32px'; img.alt=item; }
             div.appendChild(img);
             invDiv.appendChild(div);
@@ -82,13 +112,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function feedAnimal(animal){
         let food = '';
         if(animal==='cat'){
-            if(inventory.includes('Fish')) food='Fish';
-            else if(inventory.includes('Water')) food='Water';
+            if(inventory.includes("LuckyCharm"))food="LuckyCharm";
+            else if(inventory.includes("CatFood"))food="CatFood";
+            else if(inventory.includes('Fish')) food='Fish';
+            else if(inventory.includes('Water')) food='Water';           
             else { alert("You don't have Fish or Water to feed the cat."); return; }
             updateTaskProgress("feedCat");
         }
         if(animal==='dog'){
-            if(inventory.includes('Apple')) food='Apple';
+            if(inventory.includes("LuckyCharm"))food="LuckyCharm";
+            else if(inventory.includes("DogBone"))food="DogBone";
+            else if(inventory.includes('Apple')) food='Apple';
             else if(inventory.includes('Water')) food='Water';
             else { alert("You don't have Apple or Water to feed the dog."); return; }
             updateTaskProgress("feedDog");
@@ -123,8 +157,19 @@ document.addEventListener('DOMContentLoaded', function() {
                        "Woof？";
         }
         if(speech) speech.textContent = reaction;
-        if(animal === 'cat') addEXP(1); // 喂猫加 10 EXP
-        else if(animal === 'dog') addEXP(1); // 喂狗加 10 EXP
+        if (animal === 'cat') {
+    if (food === 'CatFood') addEXP(5); 
+    else if (food === 'LuckyCharm') addEXP(15);      // CatFood 给最多经验
+    else if (food === 'Fish') addEXP(1);     // Fish 中等
+    else if (food === 'Water') addEXP(1);    // Water 最低
+    }
+
+      if (animal === 'dog') {
+      if (food === 'DogBone') addEXP(5); 
+      else if (food === 'LuckyCharm') addEXP(15);      // DogBone 给最多经验
+      else if (food === 'Apple') addEXP(1);    // Apple 中等
+      else if (food === 'Water') addEXP(1);    // Water 最低
+      }
         setTimeout(()=>{ if(speech) speech.textContent = randomDialogue(animal); }, 3000);
     }
 
@@ -157,8 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
     {q:"🌧️ What falls from the sky when it rains?", options:["Fire","Rain"], answer:"Rain"},
     {q:"🌙 What do you see at night?", options:["Sun","Moon"], answer:"Moon"},
     {q:"☀️ What do you see in the morning?", options:["Sun","Stars"], answer:"Sun"},
-    {q:"🦋 Which one can fly?", options:["Butterfly","Fish"], answer:"Butterfly"},
-    {q:"🐰 Which animal loves carrots?", options:["Rabbit","Dog"], answer:"Rabbit"}
+    {q:"🦋 Which one can fly?", options:["Fish","Butterfly"], answer:"Butterfly"},
+    {q:"🐰 Which animal loves carrots?", options:["Dog","Rabbit"], answer:"Rabbit"}
 ];
 
 
@@ -594,4 +639,48 @@ function showLevelUpMessage() {
 // 初始化 UI
 updatePlayerUI();
  
+document.getElementById("open-shop").onclick = () =>
+    document.getElementById("shop-panel").style.display = "block";
+
+document.getElementById("close-shop").onclick = () =>
+    document.getElementById("shop-panel").style.display = "none";
+
+document.querySelectorAll(".shop-item").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        const item = btn.getAttribute("data-item");
+
+        if(item === "CatFood"){
+            if(countItem("Fish") < 3) return alert("Not enough fish!");
+            removeItems("Fish", 3);
+            inventory.push("CatFood");
+        }
+        if(item === "DogBone"){
+            if(countItem("Apple") < 3) return alert("Not enough apples!");
+            removeItems("Apple", 3);
+            inventory.push("DogBone");
+        }
+        if(item === "LuckyCharm"){
+            if(countItem("Water") < 10) return alert("Not enough water!");
+            removeItems("Water", 10);
+            inventory.push("LuckyCharm");
+        }
+
+        updateInventory();
+        showRewardNotification("🛒 Purchase successful!");
+    });
+});
+
+function countItem(name){
+    return inventory.filter(i => i === name).length;
+}
+function removeItems(name, amount){
+    let removed = 0;
+    for(let i=inventory.length-1;i>=0 && removed<amount;i--){
+        if(inventory[i]===name){
+            inventory.splice(i,1);
+            removed++;
+        }
+    }
+}
+
 });
