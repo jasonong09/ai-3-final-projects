@@ -347,3 +347,136 @@ body {
     0% { transform: scale(0.6); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
+
+/* ============================
+   🛒 SHOP PANEL
+============================ */
+#open-shop {
+    background: #ffa726;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+#open-shop:hover {
+    background: #fb8c00;
+    transform: scale(1.05);
+}
+
+#shop-panel {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+#shop-panel h3 {
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.shop-item {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: none;
+    background: #4fc3f7;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.2s;
+}
+.shop-item:hover {
+    background: #29b6f6;
+    transform: scale(1.03);
+}
+
+#close-shop {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background: #e57373;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#close-shop:hover {
+    background: #ef5350;
+    transform: scale(1.03);
+}
+
+
+/* ============================
+   🏆 ACHIEVEMENT SECTION
+============================ */
+#achievement-section {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#achievement-section h3 {
+    margin-bottom: 8px;
+    font-size: 1.3em;
+}
+
+#achievement-list {
+    list-style: none;
+    padding: 0;
+}
+
+#achievement-list li {
+    background: #fff8e1;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 5px solid #ffc107;
+    border-radius: 8px;
+    font-size: 1em;
+    animation: achievementPop 0.5s ease-out;
+}
+
+/* 📌 Achievements popup animation */
+@keyframes achievementPop {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+
+/* ============================
+   🌤️ WEATHER DISPLAY
+============================ */
+#weather-display {
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 1.3em;
+    text-align: center;
+    background: #e3f2fd;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    font-weight: bold;
+}
+
+/* Weather colors */
+.weather-sunny {
+    background: #fff8e1 !important;
+    color: #f9a825;
+}
+.weather-rainy {
+    background: #e1f5fe !important;
+    color: #0288d1;
+}
+.weather-snowy {
+    background: #e0f7fa !important;
+    color: #00838f;
+}
