@@ -5,9 +5,17 @@
     <title>Animal Farm</title>
     <link rel="stylesheet" href="animals.style.css">
 </head>
+
 <body>
-    <!-- Top Section: Info Boxes -->
-    <section id="info-section">
+    <nav id="navbar">
+    <button onclick="showPage('info-section')">Home</button>
+    <button onclick="showPage('farm-section')">Farm</button>
+    <button onclick="showPage('mini-games-section')">Mini Games</button>
+    <button id="open-shop" onclick="showPage('shop-section')">🛒 Open Shop</button>
+
+    </nav>
+<!-- Top Section: Info Boxes -->
+    <section id="info-section"class="page">
         <h2>Welcome to Your Interactive Animal Farm!
             <button id="play2-intro" class="intro-btn">🔊 Intro</button>
         </h2>
@@ -28,22 +36,19 @@
         <div id="info-display"></div>
     </section>
 
-     <button id="open-shop">🛒 Open Shop</button>
+     <section id="shop-section" class="page" style="display:none;">
+    <h2>🛒 Farm Shop</h2>
 
-<div id="shop-panel" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
-background:white; padding:20px; border-radius:10px; z-index:3000;">
-    <h3>🛒 Farm Shop</h3>
     <button class="shop-item" data-item="CatFood">Buy Cat Food (3 Fish)</button><br><br>
     <button class="shop-item" data-item="DogBone">Buy Dog Bone (3 Apples)</button><br><br>
     <button class="shop-item" data-item="LuckyCharm">Buy Lucky Charm (10 Water)</button><br><br>
-
-    <button id="close-shop">Close</button>
-</div>
+    <button onclick="showPage('info-section')">Back</button>
+    </section>
 
 
 
     <!-- Bottom Section: Interactive Farm -->
-    <section id="farm-section">
+    <section id="farm-section"class="page">
         <div id="farm-left">
             <div id="tree">
                 <img src="tree.png" alt="Tree">
@@ -91,6 +96,14 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
     <div id="task-section" style="background:#fff3cd; padding:15px; margin:10px; border-radius:10px;">
        <h3>📜 Today's Missions</h3>
        <ul id="task-list"></ul>
+       
+       <!-- Save/Load Controls -->
+       <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
+           <button id="save-btn" style="background:#4CAF50; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">💾 Save Game</button>
+           <button id="load-btn" style="background:#2196F3; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-left:10px;">📂 Load Game</button>
+           <button id="reset-btn" style="background:#f44336; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-left:10px;">🗑️ Reset</button>
+       </div>
+    </div>
        <div id="inventory-section">
        <h3>🎒 Inventory</h3>
        <div id="inventory"></div>
@@ -144,7 +157,7 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
     </audio>
 
     <!-- ================= Mini Games Section ================= -->
-   <section id="mini-games-section">
+   <section id="mini-games-section"class="page">
     <h2>🎮 Mini Games</h2>
 
     <!-- Word Puzzle -->

@@ -480,3 +480,32 @@ body {
     background: #e0f7fa !important;
     color: #00838f;
 }
+
+/* ===== 页面切换 ===== */
+.page {
+    display: none;
+}
+
+#info-section {
+    display: block; /* 默认显示 Home */
+}
+
+/* ===== 导航栏 ===== */
+#navbar {
+    background: #2d3436;
+    padding: 10px;
+    text-align: center;
+}
+
+#navbar button {
+    background: none;
+    border: none;
+    color: white;
+    margin: 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#navbar button:hover {
+    text-decoration: underline;
+}
