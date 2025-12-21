@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="animals.style.css">
 </head>
 
+
 <body>
     <nav id="navbar">
     <button onclick="showPage('info-section')">Home</button>
     <button onclick="showPage('farm-section')">Farm</button>
     <button onclick="showPage('mini-games-section')">Mini Games</button>
     <button id="open-shop" onclick="showPage('shop-section')">🛒 Open Shop</button>
+
 
     </nav>
 <!-- Top Section: Info Boxes -->
@@ -36,28 +38,19 @@
         <div id="info-display"></div>
     </section>
 
-<<<<<<< HEAD
+
      <section id="shop-section" class="page" style="display:none;">
     <h2>🛒 Farm Shop</h2>
+
 
     <button class="shop-item" data-item="CatFood">Buy Cat Food (3 Fish)</button><br><br>
     <button class="shop-item" data-item="DogBone">Buy Dog Bone (3 Apples)</button><br><br>
     <button class="shop-item" data-item="LuckyCharm">Buy Lucky Charm (10 Water)</button><br><br>
     <button onclick="showPage('info-section')">Back</button>
     </section>
-=======
-     <button id="open-shop">🛒 Open Shop</button>
 
-<div id="shop-panel" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
-background:white; padding:20px; border-radius:10px; z-index:3000;">
-    <h3>🛒 Farm Shop</h3>
-    <button class="shop-item" data-item="CatFood">Buy Cat Food (3 Fish)</button><br><br>
-    <button class="shop-item" data-item="DogBone">Buy Dog Bone (3 Apples)</button><br><br>
-    <button class="shop-item" data-item="LuckyCharm">Buy Lucky Charm (10 Water)</button><br><br>
 
-    <button id="close-shop">Close</button>
-</div>
->>>>>>> 3406c6eddd760df730733be123dfd96a09553b25
+
 
 
 
@@ -87,15 +80,18 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
                 <button id="lake-action">Drink Water / Fish</button>
             </div>
         </div>
-        
+       
+
 
     </section>
        <div id="player-panel">
     <div>Level: <span id="player-level">1</span></div>
 
+
     <div class="exp-bar-container">
         <div class="exp-bar" id="exp-bar"></div>
     </div>
+
 
     <div style="margin-top:6px;">
         EXP: <span id="player-exp">0</span> /
@@ -103,7 +99,11 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
     </div>
     </div>
 
+
     <div id="level-up-msg">🎉 Level Up! 🎉</div>
+
+
+
 
 
 
@@ -125,12 +125,22 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
     </div>
 
 
+
+
     <!-- Inventory -->
 
 
 
 
+
+
+
+
     <script src="animals.script.js"></script>
+
+
+
+
 
 
 
@@ -147,8 +157,16 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
 
 
 
+
+
+
+
     <!-- Reward Notification -->
     <div id="reward-notification" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fffbe6; color:#222; padding:20px 30px; border-radius:18px; font-size:1.3em; font-weight:bold; box-shadow:0 0 25px #ffd70099; z-index:2000; text-align:center; animation:fadeIn 0.3s;"></div>
+
+
+
+
 
 
 
@@ -170,9 +188,11 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
     <source src="intro2.mp3" type="audio/mpeg">
     </audio>
 
+
     <!-- ================= Mini Games Section ================= -->
    <section id="mini-games-section"class="page">
     <h2>🎮 Mini Games</h2>
+
 
     <!-- Word Puzzle -->
     <div class="mini-game" id="word-puzzle">
@@ -182,12 +202,14 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
         <button id="wp-next">Next Word</button>
     </div>
 
+
     <!-- Reaction Game -->
     <div class="mini-game" id="reaction-game">
         <h3>⚡ Reaction Speed</h3>
         <button id="rg-start">Start</button>
         <p id="rg-status">Click when it turns GREEN!</p>
     </div>
+
 
     <!-- Memory Game -->
     <div class="mini-game" id="memory-game">
@@ -196,6 +218,7 @@ background:white; padding:20px; border-radius:10px; z-index:3000;">
         <button id="mg-restart">Restart</button>
     </div>
    </section>
+
 
 </body>
 </html>

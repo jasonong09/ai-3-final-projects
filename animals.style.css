@@ -7,11 +7,15 @@ body {
 }
 
 
+
+
 #info-section {
     background: #e6ffe6;
     padding: 20px;
     text-align: center;
 }
+
+
 
 
 #info-boxes {
@@ -20,6 +24,8 @@ body {
     gap: 20px;
     margin-bottom: 10px;
 }
+
+
 
 
 .info-item {
@@ -33,9 +39,13 @@ body {
 }
 
 
+
+
 .info-item:hover {
     background: #d4f5d4;
 }
+
+
 
 
 #info-display {
@@ -44,6 +54,8 @@ body {
     font-size: 1.1em;
     color: #333;
 }
+
+
 
 
 #farm-section {
@@ -56,12 +68,16 @@ body {
 }
 
 
+
+
 #farm-left, #farm-center, #farm-right {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+
 
 
 #tree img, #lake img, #cat img, #dog img {
@@ -71,10 +87,14 @@ body {
 }
 
 
+
+
 #apple-count {
     font-weight: bold;
     margin-top: 5px;
 }
+
+
 
 
 .animal {
@@ -129,6 +149,8 @@ body {
 }
 
 
+
+
 .feed-btn {
     margin-top: 5px;
     padding: 5px 15px;
@@ -138,6 +160,8 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
+
+
 
 
 #lake-action {
@@ -151,11 +175,15 @@ body {
 }
 
 
+
+
 #inventory-section {
     background: #e6f7ff;
     padding: 15px;
     border-top: 2px solid #b3e0ff;
 }
+
+
 
 
 #inventory {
@@ -165,6 +193,7 @@ body {
     min-height: 40px;
     margin-top: 10px;
 }
+
 
 .inventory-item {
     background: #fff;
@@ -180,16 +209,20 @@ body {
     justify-content: center;
 }
 
+
 .inventory-item img {
     width: 32px;
     height: 32px;
 }
+
 
 .inventory-item span {
     font-weight: bold;
     font-size: 0.8em;
     margin-top: 2px;
 }
+
+
 
 
 .speech-bubble {
@@ -210,6 +243,8 @@ body {
     pointer-events: none; /* 防止挡住鼠标点按钮 */
     z-index: 5; /* 确保在图片上方但不太靠前 */
 }
+
+
 
 
 /* 小尾巴（三角形） */
@@ -234,9 +269,11 @@ body {
     transition: 0.2s;
 }
 
+
 .intro-btn:hover {
     background: #e2b048;
 }
+
 
 /* ===== Mini Games Section ===== */
 #mini-games-section {
@@ -246,10 +283,12 @@ body {
     border-top: 4px solid #ffcc66;
 }
 
+
 #mini-games-section h2 {
     font-size: 1.8em;
     margin-bottom: 15px;
 }
+
 
 .mini-game {
     background: #ffffff;
@@ -261,6 +300,7 @@ body {
     max-width: 550px;
 }
 
+
 .mini-game button {
     padding: 10px 20px;
     margin-top: 10px;
@@ -271,15 +311,18 @@ body {
     font-size: 1em;
 }
 
+
 .mini-game button:hover {
     background: #ffb947;
 }
+
 
 /* Reaction game */
 #rg-status {
     font-size: 1.2em;
     font-weight: bold;
 }
+
 
 /* Memory Game */
 #mg-board {
@@ -289,6 +332,7 @@ body {
     margin: 10px auto;
     width: 220px;
 }
+
 
 .mg-card {
     width: 60px;
@@ -302,6 +346,7 @@ body {
     cursor: pointer;
 }
 
+
 #player-panel {
     background: #222;
     padding: 15px;
@@ -311,10 +356,12 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
 #player-level {
     font-size: 22px;
     font-weight: bold;
 }
+
 
 .exp-bar-container {
     background: #444;
@@ -325,12 +372,14 @@ body {
     margin-top: 6px;
 }
 
+
 .exp-bar {
     height: 100%;
     background: linear-gradient(90deg, #ffcc00, #ff9900);
     width: 0%;
     transition: width 0.4s ease-out;
 }
+
 
 #level-up-msg {
     margin-top: 10px;
@@ -343,10 +392,12 @@ body {
     display: none;
 }
 
+
 @keyframes pop {
     0% { transform: scale(0.6); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
+
 
 /* ============================
    🛒 SHOP PANEL
@@ -367,6 +418,7 @@ body {
     transform: scale(1.05);
 }
 
+
 #shop-panel {
     width: 300px;
     background: white;
@@ -376,10 +428,12 @@ body {
     text-align: center;
 }
 
+
 #shop-panel h3 {
     margin-bottom: 15px;
     font-size: 1.4em;
 }
+
 
 .shop-item {
     width: 100%;
@@ -398,6 +452,7 @@ body {
     transform: scale(1.03);
 }
 
+
 #close-shop {
     margin-top: 10px;
     width: 100%;
@@ -415,6 +470,8 @@ body {
 }
 
 
+
+
 /* ============================
    🏆 ACHIEVEMENT SECTION
 ============================ */
@@ -426,15 +483,18 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+
 #achievement-section h3 {
     margin-bottom: 8px;
     font-size: 1.3em;
 }
 
+
 #achievement-list {
     list-style: none;
     padding: 0;
 }
+
 
 #achievement-list li {
     background: #fff8e1;
@@ -446,11 +506,14 @@ body {
     animation: achievementPop 0.5s ease-out;
 }
 
+
 /* 📌 Achievements popup animation */
 @keyframes achievementPop {
     0% { transform: translateY(20px); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
 }
+
+
 
 
 /* ============================
@@ -466,6 +529,7 @@ body {
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     font-weight: bold;
 }
+
 
 /* Weather colors */
 .weather-sunny {
@@ -487,9 +551,11 @@ body {
     display: none;
 }
 
+
 #info-section {
     display: block; /* 默认显示 Home */
 }
+
 
 /* ===== 导航栏 ===== */
 #navbar {
@@ -497,6 +563,7 @@ body {
     padding: 10px;
     text-align: center;
 }
+
 
 #navbar button {
     background: none;
@@ -507,6 +574,11 @@ body {
     cursor: pointer;
 }
 
+
 #navbar button:hover {
     text-decoration: underline;
 }
+
+
+
+
