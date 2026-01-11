@@ -2,225 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Animal Farm</title>
-    <link rel="stylesheet" href="animals.style.css">
-</head>
-
-
-<body>
-    <nav id="navbar">
-    <button onclick="showPage('info-section')">Home</button>
-    <button onclick="showPage('farm-section')">Farm</button>
-    <button onclick="showPage('mini-games-section')">Mini Games</button>
-    <button id="open-shop" onclick="showPage('shop-section')">🛒 Open Shop</button>
-
-
-    </nav>
-<!-- Top Section: Info Boxes -->
-    <section id="info-section"class="page">
-        <h2>Welcome to Your Interactive Animal Farm!
-            <button id="play2-intro" class="intro-btn">🔊 Intro</button>
-        </h2>
-        <p>
-            Explore the farm by clicking on any fruit or animal below to learn interesting facts about them.
-            At the bottom, you can interact with the tree to collect apples, visit the lake to drink water or catch fish, and feed your cat and dog to help them grow and evolve!
-            All items you collect will appear in your inventory as images. Try feeding your animals to see them change!
-        </p>
-        <button id="play-audio">🔊 Click to listen to music</button>
-        <audio id="intro-audio" src="intro.mp3"></audio>
-        <div id="info-boxes">
-            <div class="info-item" data-type="fruit" data-name="Apple">🍎 Apple</div>
-            <div class="info-item" data-type="fruit" data-name="Banana">🍌 Banana</div>
-            <div class="info-item" data-type="animal" data-name="Cat">🐱 Cat</div>
-            <div class="info-item" data-type="animal" data-name="Dog">🐶 Dog</div>
-            <div class="info-item" data-type="animal" data-name="Fish">🐟 Fish</div>
-        </div>
-        <div id="info-display"></div>
-    </section>
-
-
-     <section id="shop-section" class="page" style="display:none;">
-    <h2>🛒 Farm Shop</h2>
-
-
-    <button class="shop-item" data-item="CatFood">Buy Cat Food (3 Fish)</button><br><br>
-    <button class="shop-item" data-item="DogBone">Buy Dog Bone (3 Apples)</button><br><br>
-    <button class="shop-item" data-item="LuckyCharm">Buy Lucky Charm (10 Water)</button><br><br>
-    <button onclick="showPage('info-section')">Back</button>
-    </section>
-
-
-
-
-
-
-    <!-- Bottom Section: Interactive Farm -->
-    <section id="farm-section"class="page">
-        <div id="farm-left">
-            <div id="tree">
-                <img src="tree.png" alt="Tree">
-                <div id="apple-count">Apples: 0</div>
-            </div>
-        </div>
-        <div id="farm-center">
-            <div id="cat" class="animal">
-                <img src="cat.png" alt="Cat">
-                <button class="feed-btn" data-animal="cat">Feed Cat</button>
-                <div class="speech-bubble" id="cat-speech"></div>
-            </div>
-            <div id="dog" class="animal">
-                <img src="dog.png" alt="Dog">
-                <button class="feed-btn" data-animal="dog">Feed Dog</button>
-                <div class="speech-bubble" id="dog-speech"></div>
-            </div>
-        </div>
-        <div id="farm-right">
-            <div id="lake">
-                <img src="lake.png" alt="Lake">
-                <button id="lake-action">Drink Water / Fish</button>
-            </div>
-        </div>
-       
-
-
-    </section>
-       <div id="player-panel">
-    <div>Level: <span id="player-level">1</span></div>
-
-
-    <div class="exp-bar-container">
-        <div class="exp-bar" id="exp-bar"></div>
-    </div>
-
-
-    <div style="margin-top:6px;">
-        EXP: <span id="player-exp">0</span> /
-             <span id="player-exp-max">5</span>
-    </div>
-    </div>
-
-
-    <div id="level-up-msg">🎉 Level Up! 🎉</div>
-
-
-
-
-
-
-    <div id="task-section" style="background:#fff3cd; padding:15px; margin:10px; border-radius:10px;">
-       <h3>📜 Today's Missions</h3>
-       <ul id="task-list"></ul>
-       
-       <!-- Save/Load Controls -->
-       <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
-           <button id="save-btn" style="background:#4CAF50; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">💾 Save Game</button>
-           <button id="load-btn" style="background:#2196F3; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-left:10px;">📂 Load Game</button>
-           <button id="reset-btn" style="background:#f44336; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-left:10px;">🗑️ Reset</button>
-       </div>
-    </div>
-       <div id="inventory-section">
-       <h3>🎒 Inventory</h3>
-       <div id="inventory"></div>
-       </div>
-    </div>
-
-
-
-
-    <!-- Inventory -->
-
-
-
-
-
-
-
-
-    <script src="animals.script.js"></script>
-
-
-
-
-
-
-
-
-    <!-- Quiz Modal -->
-    <div id="quiz-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
-      <div style="background:#f0f8ff; padding:20px 25px; border-radius:15px; text-align:center; max-width:400px; box-shadow:0 0 15px rgba(0,0,0,0.3); animation:fadeIn 0.3s;">
-        <p id="quiz-question" style="font-size:1.1em; margin-bottom:15px;"></p>
-        <div id="quiz-options" style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;"></div>
-        <button id="quiz-close" style="margin-top:15px; padding:5px 15px; border:none; background:#ff7675; color:#fff; border-radius:8px; cursor:pointer;">❌ Close</button>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-    <!-- Reward Notification -->
-    <div id="reward-notification" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fffbe6; color:#222; padding:20px 30px; border-radius:18px; font-size:1.3em; font-weight:bold; box-shadow:0 0 25px #ffd70099; z-index:2000; text-align:center; animation:fadeIn 0.3s;"></div>
-
-
-
-
-
-
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jason's Projects</title>
     <style>
-      @keyframes fadeIn {
-        from {opacity:0; transform:scale(0.8);}
-        to {opacity:1; transform:scale(1);}
-      }
-      #quiz-options button:hover {
-        transform: scale(1.1);
-        transition: 0.2s;
-      }
-      #reward-notification {
-        transition: opacity 0.3s;
-      }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        .project-card {
+            display: block;
+            text-decoration: none;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: inherit;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-color: #4CAF50;
+        }
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .project-desc {
+            color: #666;
+        }
     </style>
-    <audio id="intro2-audio">
-    <source src="intro2.mp3" type="audio/mpeg">
-    </audio>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Jason's Projects</h1>
+        
+        <a href="animal-farm/index.html" class="project-card">
+            <div class="project-title">🐶 Animal Farm</div>
+            <div class="project-desc">Raise animals, collect items, and complete missions in this interactive farm game.</div>
+        </a>
 
-
-    <!-- ================= Mini Games Section ================= -->
-   <section id="mini-games-section"class="page">
-    <h2>🎮 Mini Games</h2>
-
-
-    <!-- Word Puzzle -->
-    <div class="mini-game" id="word-puzzle">
-        <h3>📝 Word Puzzle</h3>
-        <p id="wp-question">Loading...</p>
-        <div id="wp-options"></div>
-        <button id="wp-next">Next Word</button>
+        <a href="plant-game/index.html" class="project-card">
+            <div class="project-title">🌱 Smart Farm Assistant</div>
+            <div class="project-desc">Learn about crops, soil, and farming tips with this AI-powered assistant and game.</div>
+        </a>
     </div>
-
-
-    <!-- Reaction Game -->
-    <div class="mini-game" id="reaction-game">
-        <h3>⚡ Reaction Speed</h3>
-        <button id="rg-start">Start</button>
-        <p id="rg-status">Click when it turns GREEN!</p>
-    </div>
-
-
-    <!-- Memory Game -->
-    <div class="mini-game" id="memory-game">
-        <h3>🃏 Memory Card Flip</h3>
-        <div id="mg-board"></div>
-        <button id="mg-restart">Restart</button>
-    </div>
-   </section>
-
-
 </body>
 </html>
-
-
