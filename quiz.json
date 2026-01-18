@@ -1,0 +1,142 @@
+[
+  {
+    "q": "💧 Which one is water?",
+    "options": ["Fish", "Water"],
+    "answer": "Water"
+  },
+  {
+    "q": "🍎 Which fruit is red and crunchy?",
+    "options": ["Banana", "Apple"],
+    "answer": "Apple"
+  },
+  {
+    "q": "🐶 Which animal is loyal and friendly?",
+    "options": ["Cat", "Dog"],
+    "answer": "Dog"
+  },
+  {
+    "q": "🐱 Which animal loves napping and chasing shadows?",
+    "options": ["Dog", "Cat"],
+    "answer": "Cat"
+  },
+  {
+    "q": "🌞 Which fruit is yellow and high in energy?",
+    "options": ["Banana", "Apple"],
+    "answer": "Banana"
+  },
+  {
+    "q": "🐟 Which animal glides gracefully in water?",
+    "options": ["Fish", "Dog"],
+    "answer": "Fish"
+  },
+  {
+    "q": "🌳 Which one is a tree?",
+    "options": ["Tree", "Dog"],
+    "answer": "Tree"
+  },
+  {
+    "q": "🔥 Which one is hot?",
+    "options": ["Fire", "Water"],
+    "answer": "Fire"
+  },
+  {
+    "q": "❄️ Which one is cold?",
+    "options": ["Cat", "Ice"],
+    "answer": "Ice"
+  },
+  {
+    "q": "🥕 Which one is a vegetable?",
+    "options": ["Apple", "Carrot"],
+    "answer": "Carrot"
+  },
+  {
+    "q": "🍇 Which fruit grows in bunches?",
+    "options": ["Banana", "Grapes"],
+    "answer": "Grapes"
+  },
+  {
+    "q": "🦆 Which animal can swim and quack?",
+    "options": ["Duck", "Dog"],
+    "answer": "Duck"
+  },
+  {
+    "q": "🦁 Which one is the king of the jungle?",
+    "options": ["Lion", "Cat"],
+    "answer": "Lion"
+  },
+  {
+    "q": "🐔 Which one lays eggs?",
+    "options": ["Chicken", "Dog"],
+    "answer": "Chicken"
+  },
+  {
+    "q": "🍉 Which fruit is big and has many seeds?",
+    "options": ["Watermelon", "Apple"],
+    "answer": "Watermelon"
+  },
+  {
+    "q": "🌧️ What falls from the sky when it rains?",
+    "options": ["Fire", "Rain"],
+    "answer": "Rain"
+  },
+  {
+    "q": "🌙 What do you see at night?",
+    "options": ["Sun", "Moon"],
+    "answer": "Moon"
+  },
+  {
+    "q": "☀️ What do you see in the morning?",
+    "options": ["Sun", "Stars"],
+    "answer": "Sun"
+  },
+  {
+    "q": "🦋 Which one can fly?",
+    "options": ["Fish", "Butterfly"],
+    "answer": "Butterfly"
+  },
+  {"q": "🐰 Which animal loves carrots?","options": ["Dog", "Rabbit"],"answer": "Rabbit"},
+
+    { "q": "💧 Which state of matter does water become at 0°C?", "options": ["Ice", "Steam"], "answer": "Ice" },
+    { "q": "🔥 Which process changes water into steam?", "options": ["Evaporation", "Freezing"], "answer": "Evaporation" },
+    { "q": "❄️ What causes ice to melt?", "options": ["Heat", "Cold"], "answer": "Heat" },
+    { "q": "🌡️ Which unit is used to measure temperature?", "options": ["Celsius", "Meter"], "answer": "Celsius" },
+    { "q": "🌍 What force pulls objects toward the Earth?", "options": ["Gravity", "Magnetism"], "answer": "Gravity" },
+
+    { "q": "🍎 Which nutrient is most common in fruits?", "options": ["Vitamins", "Fats"], "answer": "Vitamins" },
+    { "q": "🍞 Which food gives quick energy?", "options": ["Carbohydrates", "Proteins"], "answer": "Carbohydrates" },
+    { "q": "🥩 Which nutrient helps build muscles?", "options": ["Protein", "Sugar"], "answer": "Protein" },
+    { "q": "🥑 Which nutrient stores the most energy?", "options": ["Fat", "Vitamin"], "answer": "Fat" },
+    { "q": "🥗 Which food group helps digestion?", "options": ["Fibre", "Salt"], "answer": "Fibre" },
+
+    { "q": "🐶 Which animal is classified as a mammal?", "options": ["Dog", "Snake"], "answer": "Dog" },
+    { "q": "🐍 Which animal is cold-blooded?", "options": ["Snake", "Cat"], "answer": "Snake" },
+    { "q": "🐸 Which animal lives both on land and in water?", "options": ["Frog", "Bird"], "answer": "Frog" },
+    { "q": "🦅 Which animal has hollow bones?", "options": ["Bird", "Cow"], "answer": "Bird" },
+    { "q": "🐋 Which mammal lives in the ocean?", "options": ["Whale", "Shark"], "answer": "Whale" },
+
+    { "q": "🌱 What process do plants use to make food?", "options": ["Photosynthesis", "Respiration"], "answer": "Photosynthesis" },
+    { "q": "☀️ Which is required for photosynthesis?", "options": ["Sunlight", "Moonlight"], "answer": "Sunlight" },
+    { "q": "🍃 Which gas do plants absorb?", "options": ["Carbon dioxide", "Oxygen"], "answer": "Carbon dioxide" },
+    { "q": "🌳 Which part of the plant transports water?", "options": ["Stem", "Leaf"], "answer": "Stem" },
+    { "q": "🌼 Which part of a plant makes seeds?", "options": ["Flower", "Root"], "answer": "Flower" },
+
+    { "q": "🧠 Which organ controls the body?", "options": ["Brain", "Heart"], "answer": "Brain" },
+    { "q": "❤️ Which organ pumps blood?", "options": ["Heart", "Lungs"], "answer": "Heart" },
+    { "q": "🫁 Which organ helps us breathe?", "options": ["Lungs", "Stomach"], "answer": "Lungs" },
+    { "q": "🦴 What gives the body structure?", "options": ["Bones", "Skin"], "answer": "Bones" },
+    { "q": "👀 Which sense organ detects light?", "options": ["Eyes", "Ears"], "answer": "Eyes" },
+
+    { "q": "⚡ Which form of energy powers electronics?", "options": ["Electrical", "Sound"], "answer": "Electrical" },
+    { "q": "🔊 What type of energy is sound?", "options": ["Mechanical", "Light"], "answer": "Mechanical" },
+    { "q": "💡 Which energy allows us to see?", "options": ["Light", "Heat"], "answer": "Light" },
+    { "q": "🔥 Heat is a form of what?", "options": ["Energy", "Matter"], "answer": "Energy" },
+    { "q": "🔋 Which device stores electrical energy?", "options": ["Battery", "Switch"], "answer": "Battery" },
+
+    { "q": "🕒 What instrument measures time?", "options": ["Clock", "Ruler"], "answer": "Clock" },
+    { "q": "📏 What instrument measures length?", "options": ["Ruler", "Thermometer"], "answer": "Ruler" },
+    { "q": "⚖️ What instrument measures mass?", "options": ["Balance", "Beaker"], "answer": "Balance" },
+    { "q": "🌡️ What instrument measures temperature?", "options": ["Thermometer", "Scale"], "answer": "Thermometer" },
+    { "q": "🧪 What is used to measure liquid volume?", "options": ["Measuring cylinder", "Ruler"], "answer": "Measuring cylinder" }
+  
+]
+

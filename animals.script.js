@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const Config = {
         infoData: {
             fruit: {
-                Apple: { text: "🍎 Apple<br><br>Apples are red, shiny, and crunchy.<br>They taste sweet and juicy.<br><br>Eating apples helps you stay healthy and strong.", img: "apple.png" },
+                 Apple: { text: "🍎 Apple<br><br>Apples are red, shiny, and crunchy.<br>They taste sweet and juicy.<br><br>Eating apples helps you stay healthy and strong.", img: "apple.png" },
                 Banana: { text: "🍌 Banana<br><br>Bananas are yellow and soft.<br>They are easy to peel and fun to eat.<br><br>Bananas give you lots of energy.", img: "banana.png" }
             },
             animal: {
@@ -19,28 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             cat: ["Meow~ It's such a comfy day 😸", "Feed me some fish! 🐟", "Have you seen my mouse? 🐭", "Purr~ I'm sunbathing ☀️", "I'm the real star of this farm! ✨"],
             dog: ["Woof woof! You're my favorite human ❤️", "Are we going for a walk today? 🏞️", "I'm hungry... got any apples? 🍎", "I'll guard the house for you! 💪", "Wagging my tail~ so happy 🐾"]
         },
-        quizQuestions: [
-            {q:"💧 Which one is water?", options:["Fish","Water"], answer:"Water"},
-            {q:"🍎 Which fruit is red and crunchy?", options:["Banana","Apple"], answer:"Apple"},
-            {q:"🐶 Which animal is loyal and friendly?", options:["Cat","Dog"], answer:"Dog"},
-            {q:"🐱 Which animal loves napping and chasing shadows?", options:["Dog","Cat"], answer:"Cat"},
-            {q:"🌞 Which fruit is yellow and high in energy?", options:["Banana","Apple"], answer:"Banana"},
-            {q:"🐟 Which animal glides gracefully in water?", options:["Fish","Dog"], answer:"Fish"},
-            {q:"🌳 Which one is a tree?", options:["Tree","Dog"], answer:"Tree"},
-            {q:"🔥 Which one is hot?", options:["Fire","Water"], answer:"Fire"},
-            {q:"❄️ Which one is cold?", options:["Cat","Ice"], answer:"Ice"},
-            {q:"🥕 Which one is a vegetable?", options:["Apple","Carrot"], answer:"Carrot"},
-            {q:"🍇 Which fruit grows in bunches?", options:["Banana","Grapes"], answer:"Grapes"},
-            {q:"🦆 Which animal can swim and quack?", options:["Duck","Dog"], answer:"Duck"},
-            {q:"🦁 Which one is the king of the jungle?", options:["Lion","Cat"], answer:"Lion"},
-            {q:"🐔 Which one lays eggs?", options:["Chicken","Dog"], answer:"Chicken"},
-            {q:"🍉 Which fruit is big and has many seeds?", options:["Watermelon","Apple"], answer:"Watermelon"},
-            {q:"🌧️ What falls from the sky when it rains?", options:["Fire","Rain"], answer:"Rain"},
-            {q:"🌙 What do you see at night?", options:["Sun","Moon"], answer:"Moon"},
-            {q:"☀️ What do you see in the morning?", options:["Sun","Stars"], answer:"Sun"},
-            {q:"🦋 Which one can fly?", options:["Fish","Butterfly"], answer:"Butterfly"},
-            {q:"🐰 Which animal loves carrots?", options:["Dog","Rabbit"], answer:"Rabbit"}
-        ],
+        quizQuestions: [ ],
         possibleTasks: [
             { type: "collectApple", text: "Collect 5 Apples", goal: 5 },
             { type: "catchFish", text: "Catch 2 Fish", goal: 2 },
@@ -48,6 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
             { type: "feedDog", text: "Feed the Dog 3 times", goal: 3 }
         ]
     };
+
+    fetch("quiz.json")
+  .then(res => res.json())
+  .then(data => {
+      Config.quizQuestions = data;
+      console.log("Quiz loaded:", data.length);
+  })
+  .catch(err => console.error("Quiz load failed", err));
+
 
     // ============================================================
     // 2. STATE MANAGEMENT
@@ -556,6 +544,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Lake Action (Quiz)
     document.getElementById('lake-action')?.addEventListener('click', () => {
+        if (Config.quizQuestions.length === 0) {
+    UI.notifications.show("⏳ Quiz loading...");
+    return;
+}
         const modal = document.getElementById('quiz-modal');
         const qText = document.getElementById('quiz-question');
         const qOptions = document.getElementById('quiz-options');
