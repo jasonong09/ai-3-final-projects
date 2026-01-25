@@ -543,44 +543,114 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('reset-btn')?.addEventListener('click', SaveSystem.reset);
 
     // Lake Action (Quiz)
-    document.getElementById('lake-action')?.addEventListener('click', () => {
-        if (Config.quizQuestions.length === 0) {
-    UI.notifications.show("⏳ Quiz loading...");
-    return;
-}
-        const modal = document.getElementById('quiz-modal');
-        const qText = document.getElementById('quiz-question');
-        const qOptions = document.getElementById('quiz-options');
-        const quiz = Config.quizQuestions[Math.floor(Math.random()*Config.quizQuestions.length)];
-        
-        qText.textContent = quiz.q;
-        qOptions.innerHTML = '';
+document.getElementById('lake-action')?.addEventListener('click', () => {
+    if (Config.quizQuestions.length === 0) {
+        UI.notifications.show("⏳ Quiz loading...");
+        return;
+    }
+
+    // 随机选择 5 题
+    const quizSet = [...Config.quizQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+
+    const modal = document.getElementById('quiz-modal');
+    const quizContainer = document.createElement('div');
+    quizContainer.innerHTML = ''; // 清空内容
+
+    let correctCount = 0;
+
+    // —— 在最上面加奖励规则 —— 
+    const rewardRules = document.createElement('div');
+    rewardRules.style.fontWeight = 'bold';
+    rewardRules.style.marginBottom = '10px';
+    rewardRules.style.textAlign = 'left';
+    rewardRules.style.fontSize = '1em';
+    rewardRules.innerHTML = `
+        1、2 → No reward<br>
+        3 → 1 reward<br>
+        4 → 2 rewards<br>
+        5 → 3 rewards
+    `;
+    quizContainer.appendChild(rewardRules);
+
+    // 生成所有题目
+    quizSet.forEach((quiz, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'quiz-item';
+
+        // 问题文本
+        const qText = document.createElement('div');
+        qText.className = 'quiz-question-text';
+        qText.textContent = `Q${index + 1}: ${quiz.q}`;
+        itemDiv.appendChild(qText);
+
+        // 选项按钮
         quiz.options.forEach(opt => {
             const btn = document.createElement('button');
             btn.textContent = opt;
-            btn.className = 'quiz-btn'; // Ensure css class exists or inline style
-            btn.style.margin = "5px";
-            btn.style.padding = "10px";
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if(opt === quiz.answer){
-                    const reward = Math.random()<0.5 ? 'Water' : 'Fish';
-                    if(reward === "Fish") Missions.progress("catchFish");
-                    Inventory.add(reward);
-                    UI.notifications.show(`✅ Correct! You got a ${reward}`);
+            btn.addEventListener('click', () => {
+                explanation.style.display = 'block';
+                if (opt === quiz.answer) {
+                    correctCount++;
+                    btn.style.backgroundColor = '#6fdc6f'; // 绿色
                 } else {
-                    UI.notifications.show("❌ Wrong! No reward this time.");
+                    btn.style.backgroundColor = '#ff7675'; // 红色
                 }
-                modal.style.display='none';
+
+                // 禁用本题按钮
+                Array.from(btn.parentElement.children).forEach(b => b.disabled = true);
             });
-            qOptions.appendChild(btn);
+            itemDiv.appendChild(btn);
         });
-        modal.style.display='flex';
+
+        // 讲解折叠
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.textContent = quiz.explanation || 'No explanation.';
+        itemDiv.appendChild(explanation);
+
+        quizContainer.appendChild(itemDiv);
     });
 
-    document.getElementById('quiz-close')?.addEventListener('click', () => {
-        document.getElementById('quiz-modal').style.display='none';
+    // 奖励按钮
+    const rewardBtn = document.createElement('button');
+    rewardBtn.textContent = 'Finish Quiz & Get Reward';
+    rewardBtn.style.marginTop = '15px';
+    rewardBtn.addEventListener('click', () => {
+        let rewardCount = 0;
+        if (correctCount === 3) rewardCount = 1;
+        else if (correctCount === 4) rewardCount = 2;
+        else if (correctCount === 5) rewardCount = 3;
+
+        if (rewardCount > 0) {
+            let rewardText = '';
+            for (let i = 0; i < rewardCount; i++) {
+                const reward = Math.random() < 0.5 ? "Fish" : "Water";
+                rewardText += reward + ' ';
+                Inventory.add(reward);
+                if(reward === "Fish") Missions.progress("catchFish");
+            }
+            UI.notifications.show(`🎉 You got ${rewardText.trim()}! (Correct: ${correctCount}/5)`);
+        } else {
+            UI.notifications.show(`😅 No reward this time! You answered ${correctCount}/5 correctly.`);
+        }
+
+        modal.style.display = 'none';
     });
+
+    quizContainer.appendChild(rewardBtn);
+
+    // 清空旧内容并显示新内容
+    modal.innerHTML = '';
+    modal.appendChild(quizContainer);
+    modal.style.display = 'flex';
+});
+
+
+
+
+
+
+
 
     // Navigation
     window.showPage = UI.pages.show; // Expose for HTML onclicks

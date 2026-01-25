@@ -579,5 +579,145 @@ body {
     text-decoration: underline;
 }
 
+/* Quiz 弹窗 */
+#quiz-modal {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh; /* <- 限制高度，防止太高 */
+    overflow-y: auto; /* <- 自动出现滚动条 */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+/* 单题容器 */
+.quiz-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+/* 问题文本 */
+.quiz-item .quiz-question-text {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* 选项按钮 */
+.quiz-item button {
+    margin: 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* 讲解折叠 */
+.quiz-item .explanation {
+    display: none;
+    margin-top: 5px;
+    font-size: 0.95em;
+    color: #333;
+    background: #f2f2f2;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+/* 折叠按钮 */
+.quiz-item .toggle-btn {
+    font-size: 0.85em;
+    padding: 2px 6px;
+    margin-left: 6px;
+    cursor: pointer;
+    background: #d0eaff;
+    border-radius: 6px;
+    border: none;
+}
+.quiz-item .toggle-btn:hover {
+    background: #a3d9ff;
+}
+
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: flex;
+  padding: 20px; /* 防止太紧 */
+}
+
+/* Modal Inner Box */
+.modal-content {
+  background: #f0f8ff;
+  padding: 20px 25px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80%;
+  overflow-y: auto; /* 超出高度可滚动 */
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s;
+}
+
+/* 每题卡片 */
+.quiz-card {
+  background: #ffffff;
+  border: 2px solid #a3d9ff;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.quiz-card p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.quiz-card button {
+  margin: 3px 5px 3px 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #4fc3f7;
+  color: white;
+  font-size: 0.9em;
+}
+
+.quiz-card button:hover {
+  background: #29b6f6;
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+
+.quiz-card .explanation {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.close-btn {
+  margin-top: 15px;
+  padding: 8px 20px;
+  border: none;
+  background: #ff7675;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 
 
