@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const Config = {
         infoData: {
             fruit: {
-                 Apple: { text: "🍎 Apple<br><br>Apples are red, shiny, and crunchy.<br>They taste sweet and juicy.<br><br>Eating apples helps you stay healthy and strong.", img: "apple.png" },
+                Apple: { text: "🍎 Apple<br><br>Apples are red, shiny, and crunchy.<br>They taste sweet and juicy.<br><br>Eating apples helps you stay healthy and strong.", img: "apple.png" },
                 Banana: { text: "🍌 Banana<br><br>Bananas are yellow and soft.<br>They are easy to peel and fun to eat.<br><br>Bananas give you lots of energy.", img: "banana.png" }
             },
             animal: {
                 Cat: { text: "🐱 Cat<br><br>Cats are cute and soft animals.<br>They love sleeping and taking naps.<br><br>Cats like to chase small things and play quietly.", img: "cat.png" },
                 Dog: { text: "🐶 Dog<br><br>Dogs are friendly and loyal animals.<br>They love their owners very much.<br><br>Dogs enjoy running and playing.", img: "dog.png" },
-                Fish: { text: "🐟 Fish<br><br>Fish live in water and swim all day.<br>They move their tails to go forward.", img: "fish.png" }
+                Fish:{ text: "🐟 Fish<br><br>Fish live in water and swim all day.<br>They move their tails to go forward.", img: "fish.png" }
             }
         },
         animalDialogues: {
@@ -27,6 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
             { type: "feedDog", text: "Feed the Dog 3 times", goal: 3 }
         ]
     };
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 
     fetch("quiz.json")
   .then(res => res.json())
@@ -140,11 +148,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 display.innerHTML = `
-                    <div style="text-align:center; background: rgba(255,255,255,0.85); padding: 12px; border-radius: 12px;">
-                        <img src="${info.img}" style="width:120px; margin-bottom:8px;">
-                        <p>${info.text}</p>
-                    </div>
-                `;
+    <div style="text-align:center; background: rgba(255,255,255,0.85); padding: 12px; border-radius: 12px;">
+        <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(name)}" target="_blank">
+            <img src="${info.img}" style="width:120px; margin-bottom:8px; cursor:pointer;">
+        </a>
+        <p>${info.text}</p>
+    </div>
+`;
+
             }
         },
         pages: {
@@ -549,102 +560,214 @@ document.getElementById('lake-action')?.addEventListener('click', () => {
         return;
     }
 
-    // 随机选择 5 题
-    const quizSet = [...Config.quizQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+    // 随机 5 题
+    const quizSet = [...Config.quizQuestions]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 5);
 
     const modal = document.getElementById('quiz-modal');
-    const quizContainer = document.createElement('div');
-    quizContainer.innerHTML = ''; // 清空内容
+    modal.innerHTML = '';
+    modal.style.display = 'flex';
+    modal.scrollTop = 0;
 
+    let currentIndex = 0;
     let correctCount = 0;
 
-    // —— 在最上面加奖励规则 —— 
+    const container = document.createElement('div');
+    container.style.width = '100%';
+    container.style.maxWidth = '420px';
+    container.style.background = '#fff';
+    container.style.padding = '16px';
+    container.style.borderRadius = '12px';
+    
+    // ===== 奖励规则说明 =====
     const rewardRules = document.createElement('div');
-    rewardRules.style.fontWeight = 'bold';
-    rewardRules.style.marginBottom = '10px';
+    rewardRules.style.background = '#fff7cc';
+    rewardRules.style.border = '1px solid #ffe08a';
+    rewardRules.style.padding = '10px';
+    rewardRules.style.borderRadius = '10px';
+    rewardRules.style.marginBottom = '12px';
+    rewardRules.style.fontSize = '0.9em';
+    rewardRules.style.lineHeight = '1.6';
     rewardRules.style.textAlign = 'left';
-    rewardRules.style.fontSize = '1em';
+
     rewardRules.innerHTML = `
-        1、2 → No reward<br>
-        3 → 1 reward<br>
-        4 → 2 rewards<br>
-        5 → 3 rewards
+    <strong>🎁 Reward Rules</strong><br>
+    correct 1 or 2 → no reward<br>
+    correct 3 → 1 reward<br>
+    correct 4 → 2 rewards<br>
+    correct 5 → 3 rewards
     `;
-    quizContainer.appendChild(rewardRules);
 
-    // 生成所有题目
-    quizSet.forEach((quiz, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'quiz-item';
+    // ===== 进度条 =====
+    const progressText = document.createElement('div');
+    progressText.style.marginBottom = '8px';
+    progressText.style.fontWeight = 'bold';
 
-        // 问题文本
-        const qText = document.createElement('div');
-        qText.className = 'quiz-question-text';
-        qText.textContent = `Q${index + 1}: ${quiz.q}`;
-        itemDiv.appendChild(qText);
+    const progressBarBg = document.createElement('div');
+    progressBarBg.style.height = '8px';
+    progressBarBg.style.background = '#eee';
+    progressBarBg.style.borderRadius = '8px';
+    progressBarBg.style.marginBottom = '16px';
 
-        // 选项按钮
-        quiz.options.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.textContent = opt;
-            btn.addEventListener('click', () => {
-                explanation.style.display = 'block';
-                if (opt === quiz.answer) {
-                    correctCount++;
-                    btn.style.backgroundColor = '#6fdc6f'; // 绿色
-                } else {
-                    btn.style.backgroundColor = '#ff7675'; // 红色
-                }
+    const progressBar = document.createElement('div');
+    progressBar.style.height = '100%';
+    progressBar.style.width = '0%';
+    progressBar.style.background = '#6fdc6f';
+    progressBar.style.borderRadius = '8px';
 
-                // 禁用本题按钮
-                Array.from(btn.parentElement.children).forEach(b => b.disabled = true);
-            });
-            itemDiv.appendChild(btn);
+    progressBarBg.appendChild(progressBar);
+
+    // ===== 问题区 =====
+    const questionEl = document.createElement('div');
+    questionEl.style.fontWeight = 'bold';
+    questionEl.style.marginBottom = '12px';
+
+    const optionsEl = document.createElement('div');
+
+    const explanationEl = document.createElement('div');
+    explanationEl.style.display = 'none';
+    explanationEl.style.marginTop = '10px';
+    explanationEl.style.fontSize = '0.9em';
+    explanationEl.style.background = '#f6f6f6';
+    explanationEl.style.padding = '8px';
+    explanationEl.style.borderRadius = '8px';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Next Question';
+    nextBtn.style.display = 'none';
+    nextBtn.style.marginTop = '16px';
+    nextBtn.type = 'button';
+
+function renderQuestion() {
+    const quiz = quizSet[currentIndex];
+    optionsEl.innerHTML = '';
+    explanationEl.style.display = 'none';
+    nextBtn.style.display = 'none';
+
+    progressText.textContent = `Question ${currentIndex + 1} / 5`;
+    progressBar.style.width = `${(currentIndex / 5) * 100}%`;
+
+    // 问题卡片
+    questionEl.innerHTML = `<div style="
+        background: #fff; 
+        padding: 16px; 
+        border-radius: 12px; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin-bottom: 12px;
+        font-size: 1.1em;
+        font-weight: bold;
+    ">${quiz.q}</div>`;
+
+    let answered = false;
+
+    shuffleArray(quiz.options);
+
+    quiz.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = opt;
+        btn.style.display = 'block';
+        btn.style.width = '100%';
+        btn.style.margin = '8px 0';
+        btn.style.padding = '12px';
+        btn.style.border = '1px solid #ccc';
+        btn.style.borderRadius = '8px';
+        btn.style.background = '#f9f9f9';
+        btn.style.cursor = 'pointer';
+        btn.style.transition = 'all 0.2s';
+
+        // 悬停效果
+        btn.addEventListener('mouseenter', () => {
+            if(!answered) btn.style.background = '#e0f7ff';
+        });
+        btn.addEventListener('mouseleave', () => {
+            if(!answered) btn.style.background = '#f9f9f9';
         });
 
-        // 讲解折叠
-        const explanation = document.createElement('div');
-        explanation.className = 'explanation';
-        explanation.textContent = quiz.explanation || 'No explanation.';
-        itemDiv.appendChild(explanation);
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (answered) return;
+            answered = true;
 
-        quizContainer.appendChild(itemDiv);
-    });
+            explanationEl.textContent = quiz.explanation || 'No explanation.';
+            explanationEl.style.display = 'block';
+            explanationEl.style.background = '#fff8e1';
+            explanationEl.style.padding = '10px';
+            explanationEl.style.borderRadius = '8px';
+            explanationEl.style.marginTop = '8px';
 
-    // 奖励按钮
-    const rewardBtn = document.createElement('button');
-    rewardBtn.textContent = 'Finish Quiz & Get Reward';
-    rewardBtn.style.marginTop = '15px';
-    rewardBtn.addEventListener('click', () => {
-        let rewardCount = 0;
-        if (correctCount === 3) rewardCount = 1;
-        else if (correctCount === 4) rewardCount = 2;
-        else if (correctCount === 5) rewardCount = 3;
+            if (opt === quiz.answer) {
+                correctCount++;
+                btn.style.backgroundColor = '#6fdc6f';
+                btn.style.borderColor = '#4caf50';
+                btn.style.color = '#fff';
+            } else {
+                btn.style.backgroundColor = '#ff7675';
+                btn.style.borderColor = '#e53935';
+                btn.style.color = '#fff';
 
-        if (rewardCount > 0) {
-            let rewardText = '';
-            for (let i = 0; i < rewardCount; i++) {
-                const reward = Math.random() < 0.5 ? "Fish" : "Water";
-                rewardText += reward + ' ';
-                Inventory.add(reward);
-                if(reward === "Fish") Missions.progress("catchFish");
+                // 高亮正确答案
+                optionsEl.querySelectorAll('button').forEach(b => {
+                    if (b.textContent === quiz.answer) {
+                        b.style.backgroundColor = '#6fdc6f';
+                        b.style.borderColor = '#4caf50';
+                        b.style.color = '#fff';
+                    }
+                });
             }
-            UI.notifications.show(`🎉 You got ${rewardText.trim()}! (Correct: ${correctCount}/5)`);
-        } else {
-            UI.notifications.show(`😅 No reward this time! You answered ${correctCount}/5 correctly.`);
-        }
 
-        modal.style.display = 'none';
+            optionsEl.querySelectorAll('button')
+                .forEach(b => b.disabled = true);
+
+            nextBtn.style.display = 'block';
+        });
+
+        optionsEl.appendChild(btn);
+    });
+}
+
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex++;
+        if (currentIndex < 5) {
+            renderQuestion();
+        } else {
+            // ===== 结算奖励 =====
+            modal.style.display = 'none';
+
+            let rewardCount = 0;
+            if (correctCount === 3) rewardCount = 1;
+            else if (correctCount === 4) rewardCount = 2;
+            else if (correctCount === 5) rewardCount = 3;
+
+            if (rewardCount > 0) {
+                let rewards = [];
+                for (let i = 0; i < rewardCount; i++) {
+                    const reward = Math.random() < 0.5 ? "Fish" : "Water";
+                    Inventory.add(reward);
+                    rewards.push(reward);
+                    if (reward === "Fish") Missions.progress("catchFish");
+                }
+                UI.notifications.show(`🎉 You got ${rewards.join(', ')}! (${correctCount}/5 correct)`);
+            } else {
+                UI.notifications.show(`😅 ${correctCount}/5 correct. Try again!`);
+            }
+        }
     });
 
-    quizContainer.appendChild(rewardBtn);
+    container.appendChild(rewardRules);
+    container.appendChild(progressText);
+    container.appendChild(progressBarBg);
+    container.appendChild(questionEl);
+    container.appendChild(optionsEl);
+    container.appendChild(explanationEl);
+    container.appendChild(nextBtn);
 
-    // 清空旧内容并显示新内容
-    modal.innerHTML = '';
-    modal.appendChild(quizContainer);
-    modal.style.display = 'flex';
+    modal.appendChild(container);
+
+    renderQuestion();
 });
-
 
 
 
